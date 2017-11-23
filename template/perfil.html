@@ -1,0 +1,92 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <title>{{ user.name }} {{ user.last_name }} - Perfil</title>
+      <link rel="stylesheet" href="../jscss/style.css" type="text/css" />
+   </head>
+   <body>
+      <div class="nav">
+         <img src="../photos/{{ user.image }}" />
+         <ul>
+            <li><a href="wall">Mural</a></li>
+			<li><a href="friends">Amigos</a></li>
+			<li class="selected">Perfil(<a href="?e=edit">Editar</a>)</li>
+            <li><a href="photos">Fotos</a></li>
+            <li><a href="messages">Mensagens</a></li>
+            <li><a href="events">Eventos</a></li>
+			<li><a href="contact_info">Informações de Contato</a></li>
+         </ul>
+      </div>
+      <div class="contents">
+         <h1>{{ user.name }} {{ user.last_name }}</h1>
+         <div>
+            <table>
+               <tr>
+                  <th>Perfil</th>
+                  <td><a href="localhost:8081/@{{ username }}">http://localhost:8081/@{{ username }}</a></td>
+               </tr>
+               <tr>
+                  <th>E-mail</th>
+                  <td>{{ user.email_address }}</td>
+               </tr>
+               <tr>
+                  <th>Nascimento</th>
+                  <td>{{ user.birth }}</td>
+               </tr>
+               <tr>
+                  <th>Gênero</th>
+				  {% ifequal user.genre 0 %}
+                  <td>Não informado</td>
+				  {%endifequal%}
+				  {% ifequal user.genre 1 %}
+                  <td>Masculino</td>
+				  {%endifequal%}
+				  {% ifequal user.genre 2 %}
+                  <td>Feminino</td>
+				  {%endifequal%}
+               </tr>
+			   <tr>
+                  <th>País</th>
+                  <td>Brasil</td>
+               </tr>
+               <tr>
+                  <th>Cidade</th>
+				  {% ifequal user.city "nulo" %}
+						<td>Não informado</td>
+				  {%else%}	
+						<td>{{ user.city }}</td>
+				  {%endifequal%}
+               </tr>
+               <tr>
+                  <th>Status de relacionamento</th>
+				  {% ifequal user.relationship 0 %}
+                  <td>Não informado</td>
+				  {%endifequal%}
+				  {% ifequal user.relationship 1 %}
+                  <td>Solteiro/a</td>
+				  {%endifequal%}
+				  {% ifequal user.relationship 2 %}
+                  <td>Em relacionamento aberto</td>
+				  {%endifequal%}
+				  {% ifequal user.relationship 3 %}
+                  <td>Em relacionamento sério</td>
+				  {%endifequal%}
+				  {% ifequal user.relationship 4 %}
+                  <td>Casado/a</td>
+				  {%endifequal%}
+               </tr>
+               <tr>
+                  <th>Educação</th>
+                  <td>
+					 {% ifequal user.education "nulo" %}
+						<p>Não informado</p>
+					{%else%}	
+						<p>{{ user.education }}</p>
+					{%endifequal%}
+                  </td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

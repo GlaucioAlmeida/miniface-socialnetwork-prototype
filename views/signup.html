@@ -1,0 +1,26 @@
+{% extends "main.html" %}
+
+{% block title %}Register a new user{% endblock %}
+
+{% block maincontent %}
+{%if msgErro %}
+<h5 style="color:red">Erro: {{msgErro}}</h5>
+{%endif%}
+<h1>Cadastre-se</h1>
+<form action="/signup" method="POST">
+	<label for="name">Nome</label>
+		<input type="text" name="name" value="{{name}}"/>
+	<label for="lastname">Sobrenome</label>
+		<input type="text" name="lastname" value="{{last_name}}"/>
+	<label for="username">Usuario</label>
+		<input type="text" name="username" value="{{user_name}}"/>
+	<label for="email">Email</label>
+		<input type="text" name="email" value="{{email}}"/>
+	<label for="password">Senha</label>
+		<input type="password" name="password" />
+	<label for="password2">Confirmar senha</label>
+		<input type="password" name="password2" />
+	<input type="submit" value="Registrar" />
+</form>
+
+{% endblock %}

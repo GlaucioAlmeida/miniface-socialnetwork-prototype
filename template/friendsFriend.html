@@ -1,0 +1,37 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <title>{{myFriendName}} - Amigos</title>
+      <link rel="stylesheet" href="../jscss/style.css" type="text/css" />
+   </head>
+   <body>
+      <div class="nav">
+		<li><a href="/">Início</a></li>
+         <img src="../photos/{{myFriendImage}}" />
+         <ul>
+            <li><a href="wall">Mural</a></li>
+			<li class="selected">Amigos ({{ params|length }})</li>
+			<li><a href="perfil">Perfil</a></li>
+            <li><a href="photos">Fotos</a></li>            
+            <li><a href="messages">Mensagens</a></li>
+			<li><a href="events">Eventos</a></li>
+			<li><a href="contact_info">Informações de Contato</a></li>            
+         </ul>
+      </div>
+      <div class="contents">
+         <h1>{{myFriendName}}</h1>
+         <div>
+            <h2>Amigos</h2>
+            <ul>
+				{% for friend in params %}
+					<li>
+					{% if friend.image %}
+					<img class="image_friend" src="../photos/{{friend.image}}">
+					{%endif%}
+					<a href="/@{{friend.auth_ids.0}}" style="margin: 1em 0.5em;float: left;">{{friend.name}} {{friend.last_name}}</a></li>
+				{%endfor%}		
+            </ul>
+         </div>
+      </div>
+   </body>
+</html>

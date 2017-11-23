@@ -1,0 +1,87 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <title>{{friend.name}} {{friend.last_name}} - Mural</title>
+      <link rel="stylesheet" href="../jscss/style.css" type="text/css" />
+   </head>
+   <body>
+      <div class="nav">
+		<li><a href="/">Início</a></li>
+         <img src="../photos/{{friend.image}}" />
+         <ul>
+            <li class="selected"><a href="/@{{ link }}/wall">Mural</a></li>
+			<li><a href="/@{{ link }}/friends">Amigos</a></li>
+			<li><a href="/@{{ link }}/perfil">Perfil</a></li>
+            <li><a href="/@{{ link }}/photos">Fotos</a></li>            
+            <li><a href="/@{{ link }}/messages">Mensagens</a></li>
+            <li><a href="/@{{ link }}/events">Eventos</a></li>
+			<li><a href="/@{{ link }}/contact_info">Informações de Contato</a></li>
+         </ul>
+      </div>
+      <div class="contents">
+         <h1>{{friend.name}} {{friend.last_name}}</h1>
+         <div>
+			<p><div class="meta" style="width:100%;margin:0.3em 0 1em 0;padding: 0 0 0.5em;background:#DFEBCB"></div></p>
+            <p>
+			{% if post %}
+				{% for item in post %}
+				<p>
+					<div class="meta">{{item.datetime}}</div> {{friend.name}} {{friend.last_name}} atualizou seu status.
+					<div class="comment">{{item.msg}}</div>
+					{% if item.comments %}
+						{% for comment in item.comments reversed%}
+							{% if forloop.counter0 < 4 %}
+								<div class="comment2">
+									<div class="meta"><a href="@{{comment.user_auth_ids}}">{{comment.user_name_lastname}}</a></div>
+									{{comment.msg}}
+								</div>
+							{%else%}
+								{{break}}
+							{%endif%}
+						{%endfor%}
+					{%endif%}
+					<form method="post" style="background: #acbffc;margin: -0.3em 0;padding: 0.2em;">
+						<input type="hidden" name="uid" value="{{item.key.urlsafe}}"/>
+						<input type="text" name="newComment" style="width: 65%;"/>
+						<input type="submit" value="Comentar">
+						<input type="submit" value="Ver mais comentarios">
+					</form>
+				</p>
+				{%endfor%}	
+				
+			{%else%}
+				{% if params %}
+				<p>
+					<div class="meta">{{params.datetime}}</div> {{friend.name}} {{friend.last_name}} atualizou seu status.
+					<div class="comment">{{params.msg}}</div>
+					{% if params.comments %}
+						{% for comment in params.comments reversed%}							
+							<div class="comment2">
+								<div class="meta"><a href="@{{comment.user_auth_ids}}">{{comment.user_name_lastname}}</a></div>
+								{{comment.msg}}
+							</div>
+						{%endfor%}
+					{%endif%}
+					<form method="post" style="background: #acbffc;margin: -0.3em 0;padding: 0.2em;">
+						<input type="hidden" name="uid" value="{{params.key.urlsafe}}"/>
+						<input type="text" name="newComment" required style="width: 65%;"/>
+						<input type="submit" value="Comentar">
+					</form>
+				</p>
+				{%endif%}
+			{%endif%}
+			<p><!--EXIBIDO DE FORMA INDEPENDENTE-->
+				{% ifequal friend.created.year friend.birth.year %}
+					<div class="meta">{{friend.created}}</div>
+					{{friend.name}} {{friend.last_name}} entrou na rede social.
+				{%else%}
+					<div class="meta">{{friend.created}}</div>
+					{{friend.name}} {{friend.last_name}} entrou na rede social.
+					<br/><br/><div class="meta">{{friend.birth}}</div>
+					{{friend.name}} {{friend.last_name}} Nasceu.
+				{%endifequal%}
+			</p>
+         </div>
+      </div>
+	</body>
+</html>

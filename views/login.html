@@ -1,0 +1,22 @@
+{% extends "main.html" %}
+
+{% block maincontent %}
+<h1>Bem-vindo!</h1>
+{% if failed %}
+	<strong>Erro no login!</strong> Verifique suas credenciais.
+{% endif %}
+{% if user %}
+	<meta http-equiv="refresh" content="0;URL=http://localhost:8081/">
+{% endif %}
+<form class="form" action= "/login" method="POST">
+	<label for="username">Usuario</label>
+	<input type="text" value="{{ username }}" name="username"/>
+	<label for="password">Senha</label>
+	<input type="password" name="password"/>
+	<button type="submit" class="btn">Entrar</button>
+</form>
+
+<a href="/forgot">Recuperar senha</a>
+
+
+{% endblock %}

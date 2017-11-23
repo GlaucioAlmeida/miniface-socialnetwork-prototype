@@ -1,0 +1,121 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <title>{{ user.name }} {{ user.last_name }} - Perfil</title>
+      <link rel="stylesheet" href="../jscss/style.css" type="text/css" />
+   </head>
+   <body>
+      <div class="nav">
+         <img src="../photos/{{user.image}}" />
+         <ul>
+            <li><a href="wall">Mural</a></li>
+			<li><a href="friends">Amigos</a></li>
+			<li class="selected">Perfil</li>
+            <li><a href="photos">Fotos</a></li>
+            <li><a href="messages">Mensagens</a></li>
+            <li><a href="events">Eventos</a></li>
+			<li><a href="contact_info">Informações de Contato</a></li>
+         </ul>
+      </div>
+      <div class="contents">
+	  <form action="/perfil" method="post" enctype="multipart/form-data">
+         <h1>{{ user.name }} {{ user.last_name }}</h1>
+         <div>
+            <table>
+               <tr>
+                  <th>Perfil</th>
+                  <td><a href="localhost:8080/{{ user.username }}">http://localhost:8080/{{ user.username }}</a>
+						<input class="file-input file-input2" type="file" accept='image/jpeg' name="imagePerfil"/></td>
+               </tr>
+               <tr>
+                  <th>E-mail</th>
+                  <td>{{ user.email_address }}</td>
+               </tr>
+               <tr>
+                  <th>Nascimento</th>
+                  <td><input type="date" name="birth" value="{{ user.birth }}"/></td>
+               </tr>
+               <tr>
+                  <th>Gênero</th>
+				  <td><select name="genre">
+					{% ifequal user.genre 1 %}
+						<option value="1" selected>Masculino</option>
+						<option value="2">Feminino</option>
+					{%else%}
+						<option value="1">Masculino</option>
+						{% ifequal user.genre 2 %}
+							<option value="2" selected>Feminino</option>
+						{%else%}
+							<option value="2">Feminino</option>
+							<option value="0" selected>Selecione</option>
+						{%endifequal%}
+					{%endifequal%}
+				  </select></td>
+               </tr>
+			   <tr>
+                  <th>País</th>
+                  <td>Brasil</td>
+               </tr>
+               <tr>
+                  <th>Cidade</th>
+				  <td>
+				  {% ifequal user.city "nulo" %}
+						<input type="text" name="city" placeholder="Não informado"/>
+				  {%else%}	
+						<input type="text" name="city" value="{{ user.city }}"/>
+				  {%endifequal%}
+				  </td>
+               </tr>
+               <tr>
+                  <th>Status de relacionamento</th>
+				  <td><select name="relationship">
+					{% ifequal user.relationship 1 %}
+						<option value="1" selected>Solteiro/a</option>
+						<option value="2">Em relacionamento aberto</option>
+						<option value="3">Em relacionamento sério</option>
+						<option value="4">Casado/a</option>
+					{%else%}
+						<option value="1">Solteiro/a</option>
+						{% ifequal user.relationship 2 %}
+							<option value="2" selected>Em relacionamento aberto</option>
+							<option value="3">Em relacionamento sério</option>
+							<option value="4">Casado/a</option>
+						{%else%}
+							<option value="2">Em relacionamento aberto</option>
+							{% ifequal user.relationship 3 %}
+								<option value="3" selected>Em relacionamento sério</option>
+								<option value="4">Casado/a</option>
+							{%else%}
+								<option value="3">Em relacionamento sério</option>
+								{% ifequal user.relationship 4 %}
+									<option value="4" selected>Casado/a</option>
+								{%else%}
+									<option value="4">Casado/a</option>
+									<option value="0" selected>Selecione</option>
+								{%endifequal%}
+							{%endifequal%}
+						{%endifequal%}
+					{%endifequal%}
+				  </select></td>
+				  
+				  
+               </tr>
+               <tr>
+                  <th>Educação</th>
+                  <td>
+					 {% ifequal user.education "nulo" %}
+						<input type="text" name="education" placeholder="Não informado"/>
+					{%else%}	
+						<input type="text" name="education" value="{{user.education}}"/>
+					{%endifequal%}
+                  </td>
+               </tr>
+			   <tr>
+                  <th></th>
+                  <td><input type="submit" value="Salvar"/></td>
+            </table>
+         </div>
+		 </form>
+      </div>
+   </body>
+</html>

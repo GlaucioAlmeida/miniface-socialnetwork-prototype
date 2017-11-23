@@ -1,0 +1,99 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <title>{{ params.name }} {{ params.last_name }} - Perfil</title>
+      <link rel="stylesheet" href="../jscss/style.css" type="text/css" />
+   </head>
+   <body>
+      <div class="nav">
+		<li><a href="/">Início</a></li>
+         <img src="../photos/{{ params.image }} " />
+         <ul>
+            <li><a href="/@{{ link }}/wall">Mural</a></li>
+			<li><a href="/@{{ link }}/friends">Amigos</a></li>
+			<li class="selected">Perfil</li>
+            <li><a href="/@{{ link }}/photos">Fotos</a></li>
+            <li><a href="/@{{ link }}/messages">Mensagens</a></li>
+            <li><a href="/@{{ link }}/events">Eventos</a></li>
+			<li><a href="/@{{ link }}/contact_info">Informações de Contato</a></li>
+			<li>
+			<form method="post">
+				<input type="hidden" name="option" value="remove">
+				<input type="submit" value="Desfazer amizade">
+			</form>
+			</li>
+         </ul>
+      </div>
+      <div class="contents">
+         <h1>{{ params.name }} {{ params.last_name }}</h1>
+         <div>
+            <table>
+               <tr>
+                  <th>Perfil</th>
+                  <td><a href="localhost:8081/@{{ link }}">http://localhost:8081/@{{ link }}</a></td>
+               </tr>
+               <tr>
+                  <th>E-mail</th>
+                  <td>{{ params.email_address }}</td>
+               </tr>
+               <tr>
+                  <th>Nascimento</th>
+                  <td>{{ params.birth }}</td>
+               </tr>
+               <tr>
+                  <th>Gênero</th>
+				  {% ifequal params.genre 0 %}
+                  <td>Não informado</td>
+				  {%endifequal%}
+				  {% ifequal params.genre 1 %}
+                  <td>Masculino</td>
+				  {%endifequal%}
+				  {% ifequal params.genre 2 %}
+                  <td>Feminino</td>
+				  {%endifequal%}
+               </tr>
+			   <tr>
+                  <th>País</th>
+                  <td>Brasil</td>
+               </tr>
+               <tr>
+                  <th>Cidade</th>
+				  {% ifequal params.city "nulo" %}
+						<td>Não informado</td>
+				  {%else%}	
+						<td>{{ params.city }}</td>
+				  {%endifequal%}
+               </tr>
+               <tr>
+                  <th>Status de relacionamento</th>
+				  {% ifequal params.relationship 0 %}
+                  <td>Não informado</td>
+				  {%endifequal%}
+				  {% ifequal params.relationship 1 %}
+                  <td>Solteiro/a</td>
+				  {%endifequal%}
+				  {% ifequal params.relationship 2 %}
+                  <td>Em relacionamento aberto</td>
+				  {%endifequal%}
+				  {% ifequal params.relationship 3 %}
+                  <td>Em relacionamento sério</td>
+				  {%endifequal%}
+				  {% ifequal params.relationship 4 %}
+                  <td>Casado/a</td>
+				  {%endifequal%}
+               </tr>
+               <tr>
+                  <th>Educação</th>
+                  <td>
+					 {% ifequal params.education "nulo" %}
+						<p>Não informado</p>
+					{%else%}	
+						<p>{{ params.education }}</p>
+					{%endifequal%}
+                  </td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

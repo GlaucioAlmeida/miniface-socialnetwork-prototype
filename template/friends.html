@@ -1,0 +1,53 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <title>{{myName}} - Amigos</title>
+      <link rel="stylesheet" href="../jscss/style.css" type="text/css" />
+   </head>
+   <body>
+      <div class="nav">
+         <img src="../photos/{{myImage}}" />
+         <ul>
+            <li><a href="wall">Mural</a></li>
+			{% if newFriend %} 
+				<li class="selected">Amigos ({{ params|length }} / {{ newFriend|length }})</li>
+			{%else%}
+				<li class="selected">Amigos ({{ params|length }})</li>
+			{%endif%}
+			<li><a href="perfil">Perfil</a></li>
+            <li><a href="photos">Fotos</a></li>            
+            <li><a href="messages">Mensagens</a></li>
+			<li><a href="events">Eventos</a></li>
+			<li><a href="contact_info">Informações de Contato</a></li>            
+         </ul>
+      </div>
+      <div class="contents">
+         <h1>{{myName}}</h1>
+         <div>
+			{% if newFriend %} 
+				<h4>Novos amigos</h4>
+				<ul>
+					{% for friend in newFriend %}
+						<li>
+							{% if friend.image %}
+							<img class="image_friend" src="../photos/{{friend.image}}">
+							{%endif%}
+							<a href="/@{{friend.auth_ids.0}}" style="margin: 1em 0.5em;float: left;">{{friend.name}} {{friend.last_name}}</a>
+						</li>
+					{%endfor%}		
+				</ul>
+			{%endif%}
+            {% if params %} <h2>Amigos</h2>{%endif%}
+            <ul>
+				{% for friend in params %}
+					<li>
+					{% if friend.image %}
+					<img class="image_friend" src="../photos/{{friend.image}}">
+					{%endif%}
+					<a href="/@{{friend.auth_ids.0}}" style="margin: 1em 0.5em;float: left;">{{friend.name}} {{friend.last_name}}</a></li>
+				{%endfor%}		
+            </ul>
+         </div>
+      </div>
+   </body>
+</html>
